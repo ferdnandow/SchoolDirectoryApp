@@ -1,4 +1,4 @@
-#CA1 Assignment (20%)
+# CA1 Assignment (20%)
 
 
 # School Directory App
