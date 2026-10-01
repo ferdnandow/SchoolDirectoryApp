@@ -9,6 +9,9 @@
 <h1>School Directory</h1>
 
 <button class="btn btn-primary mb-3" @onclick="Refresh">Refresh</button>
+<button class="btn btn-secondary mb-3" @onclick="() => sortAsc = !sortAsc">
+    @(sortAsc ? "Sort Z-A" : "Sort A-Z")
+</button>
 
 
 @if (error)
@@ -60,9 +63,23 @@ else
     private bool error;
     private string Search { get; set; } = "";
 
-    private List<School> filtered => schools == null
-        ? new List<School>()
-        : schools.Where(s => s.SchoolName.Contains(Search, StringComparison.OrdinalIgnoreCase)).ToList();
+    private bool sortAsc = true;
+
+    private List<School> filtered
+    {
+        get
+        {
+            if (schools == null)
+                return new List<School>();
+
+            var result = schools.Where(s => s.SchoolName.Contains(Search, StringComparison.OrdinalIgnoreCase));
+
+            if (sortAsc)
+                return result.OrderBy(s => s.SchoolName).ToList();
+
+            return result.OrderByDescending(s => s.SchoolName).ToList();
+        }
+    }
 
     protected override async Task OnInitializedAsync()
     {
