@@ -24,6 +24,32 @@ else if (schools == null)
 }
 else
 {
+    <div class="row mb-3">
+        <div class="col-md-4">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h3>@schools.Count</h3>
+                    <p class="mb-0">Total schools</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h3>@filtered.Count</h3>
+                    <p class="mb-0">Showing</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h3>@favourites.Count</h3>
+                    <p class="mb-0">Favourites</p>
+                </div>
+            </div>
+        </div>
+    </div>
     <input @bind="Search"
            @bind:event="oninput"
            class="form-control mb-3"
