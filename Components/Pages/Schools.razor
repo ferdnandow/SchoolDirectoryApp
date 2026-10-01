@@ -39,7 +39,10 @@ else
             {
                 @foreach (var school in filtered)
                 {
-                    <SchoolCard School="school" OnSelect="SelectSchool" />
+                    <SchoolCard School="school"
+                                IsFavourite="favourites.Contains(school.SchoolId)"
+                                OnSelect="SelectSchool"
+                                OnFavourite="ToggleFavourite" />
                 }
             }
         </div>
@@ -109,5 +112,15 @@ else
     private void SelectSchool(School school)
     {
         selected = school;
+    }
+    
+    private List<int> favourites = new List<int>();
+
+    private void ToggleFavourite(School school)
+    {
+        if (favourites.Contains(school.SchoolId))
+            favourites.Remove(school.SchoolId);
+        else
+            favourites.Add(school.SchoolId);
     }
 }

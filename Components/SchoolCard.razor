@@ -2,7 +2,14 @@
 
 <div class="card mb-2" style="cursor: pointer;" @onclick="Select">
     <div class="card-body">
-        <h5 class="card-title">@School.SchoolName</h5>
+        <div class="d-flex justify-content-between">
+            <h5 class="card-title">@School.SchoolName</h5>
+            <button class="btn btn-sm btn-outline-warning"
+                    @onclick="Favourite"
+                    @onclick:stopPropagation="true">
+                @(IsFavourite ? "★" : "☆")
+            </button>
+        </div>
         <small>
             ID: @School.SchoolId<br />
             Address: @School.Address<br />
@@ -19,10 +26,21 @@
     public School School { get; set; } = new School();
 
     [Parameter]
+    public bool IsFavourite { get; set; }
+
+    [Parameter]
     public EventCallback<School> OnSelect { get; set; }
+
+    [Parameter]
+    public EventCallback<School> OnFavourite { get; set; }
 
     private async Task Select()
     {
         await OnSelect.InvokeAsync(School);
+    }
+
+    private async Task Favourite()
+    {
+        await OnFavourite.InvokeAsync(School);
     }
 }
