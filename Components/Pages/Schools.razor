@@ -23,23 +23,37 @@ else
            class="form-control mb-3"
            placeholder="Search school..." />
 
-    @if (filtered.Count == 0)
-    {
-        <p>No schools found.</p>
-    }
-    else
-    {
-        <ul>
-            @foreach (var school in filtered)
+    <div class="row">
+        <div class="col-md-6">
+            @if (filtered.Count == 0)
             {
-                <li>@school.SchoolName</li>
+                <p>No schools found.</p>
             }
-        </ul>
-    }
+            else
+            {
+                @foreach (var school in filtered)
+                {
+                    <SchoolCard School="school" OnSelect="SelectSchool" />
+                }
+            }
+        </div>
+
+        <div class="col-md-6">
+            @if (selected == null)
+            {
+                <p>Select a school to see the details.</p>
+            }
+            else
+            {
+                <SchoolDetails School="selected" />
+            }
+        </div>
+    </div>
 }
 
 @code {
     private List<School>? schools;
+    private School? selected;
     private bool error;
     private string Search { get; set; } = "";
 
@@ -57,5 +71,10 @@ else
         {
             error = true;
         }
+    }
+
+    private void SelectSchool(School school)
+    {
+        selected = school;
     }
 }

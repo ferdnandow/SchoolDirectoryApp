@@ -1,0 +1,28 @@
+@using SchoolDirectoryApp.Models
+
+<div class="card mb-2" style="cursor: pointer;" @onclick="Select">
+    <div class="card-body">
+        <h5 class="card-title">@School.SchoolName</h5>
+        <small>
+            ID: @School.SchoolId<br />
+            Address: @School.Address<br />
+            Phone: @School.PhoneNo<br />
+            Email: @School.EmailAddress<br />
+            Proprietor: @School.ProprietorFullName<br />
+            Head: @School.HeadFullName
+        </small>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public School School { get; set; } = new School();
+
+    [Parameter]
+    public EventCallback<School> OnSelect { get; set; }
+
+    private async Task Select()
+    {
+        await OnSelect.InvokeAsync(School);
+    }
+}
