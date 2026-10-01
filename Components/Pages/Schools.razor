@@ -8,6 +8,9 @@
 
 <h1>School Directory</h1>
 
+<button class="btn btn-primary mb-3" @onclick="Refresh">Refresh</button>
+
+
 @if (error)
 {
     <p class="text-danger">Unable to retrieve school data.</p>
@@ -63,6 +66,11 @@ else
 
     protected override async Task OnInitializedAsync()
     {
+        await LoadSchools();
+    }
+
+    private async Task LoadSchools()
+    {
         try
         {
             schools = await schoolService.GetSchools();
@@ -71,6 +79,14 @@ else
         {
             error = true;
         }
+    }
+
+    private async Task Refresh()
+    {
+        schools = null;
+        selected = null;
+        error = false;
+        await LoadSchools();
     }
 
     private void SelectSchool(School school)
