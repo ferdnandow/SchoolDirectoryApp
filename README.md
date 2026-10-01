@@ -5,6 +5,19 @@
 
 A Blazor Web App that consumes the Edutots School API and shows a directory of schools. Users can see all schools, search by name, and click a school to see its details.
 
+## Extras Features
+
+- List of all schools from the API
+- Search schools by name
+- Click a school to see its details
+- Loading message while data is being retrieved
+- Error message if the API fails
+- Refresh button to reload the data
+- Sort schools by name (A-Z / Z-A)
+- Mark schools as favourites
+- Statistics panel with total schools, schools showing and favourites
+- Responsive layout with Bootstrap
+
 ## Technologies Used
 
 - C# and .NET 10
