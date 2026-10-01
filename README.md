@@ -7,7 +7,7 @@ A Blazor Web App that consumes the Edutots School API and shows a directory of s
 
 ## Technologies Used
 
-- C# and .NET 9
+- C# and .NET 10
 - Blazor Web App (Interactive Server)
 - HttpClient with System.Net.Http.Json
 - Bootstrap
