@@ -1,0 +1,61 @@
+@page "/schools"
+@rendermode InteractiveServer
+@using SchoolDirectoryApp.Models
+@using SchoolDirectoryApp.Services
+@inject SchoolService schoolService
+
+<PageTitle>Schools</PageTitle>
+
+<h1>School Directory</h1>
+
+@if (error)
+{
+    <p class="text-danger">Unable to retrieve school data.</p>
+}
+else if (schools == null)
+{
+    <p>Loading schools...</p>
+}
+else
+{
+    <input @bind="Search"
+           @bind:event="oninput"
+           class="form-control mb-3"
+           placeholder="Search school..." />
+
+    @if (filtered.Count == 0)
+    {
+        <p>No schools found.</p>
+    }
+    else
+    {
+        <ul>
+            @foreach (var school in filtered)
+            {
+                <li>@school.SchoolName</li>
+            }
+        </ul>
+    }
+}
+
+@code {
+    private List<School>? schools;
+    private bool error;
+    private string Search { get; set; } = "";
+
+    private List<School> filtered => schools == null
+        ? new List<School>()
+        : schools.Where(s => s.SchoolName.Contains(Search, StringComparison.OrdinalIgnoreCase)).ToList();
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            schools = await schoolService.GetSchools();
+        }
+        catch
+        {
+            error = true;
+        }
+    }
+}
