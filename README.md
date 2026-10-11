@@ -39,14 +39,14 @@ The app only uses these fields from the response: SchoolId, SchoolName, Address,
 ```
 SchoolDirectoryApp
 ├── Models
-│   └── School.cs
+│   --> School.cs
 ├── Services
-│   └── SchoolService.cs
+│   --> SchoolService.cs
 ├── Components
-│   ├── SchoolCard.razor
-│   ├── SchoolDetails.razor
-│   └── Pages
-│       └── Schools.razor
+│   --> SchoolCard.razor
+│   --> SchoolDetails.razor
+│   --> Pages
+│       --> Schools.razor
 └── Program.cs
 ```
 
